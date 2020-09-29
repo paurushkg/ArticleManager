@@ -37,16 +37,16 @@ class ArticleDetail(APIView):
         serializer = ArticleSerializer(article)
         return Response(serializer.data)
     
-    def put(self, request, id):
-        article = self.get_object(id)
+    def put(self, request, pk):
+        article = self.get_object(pk)
         serializer = ArticleSerializer(article, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=400)
 
-    def delete(self, request, id):
-        article = self.get_object(id)
+    def delete(self, request, pk):
+        article = self.get_object(pk)
         article.delete()
         return Response(status=204)
 
